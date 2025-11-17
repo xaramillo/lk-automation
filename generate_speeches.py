@@ -10,7 +10,7 @@ import os
 import sys
 import time
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Optional, Tuple
 from dotenv import load_dotenv
 
@@ -124,7 +124,7 @@ Responde SOLO con el mensaje, sin introducción ni explicaciones adicionales."""
         
         metadata = {
             'LLM_Model': self.model,
-            'LLM_Timestamp': datetime.utcnow().isoformat() + 'Z',
+            'LLM_Timestamp': datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
             'LLM_Tokens_Used': 0,
             'LLM_Temperature': self.temperature,
             'LLM_Status': 'error',
